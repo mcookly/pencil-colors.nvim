@@ -7,7 +7,7 @@ local function set_highlight(hl_group)
 end
 
 local function load_highlights(p)
-   local hl = {}
+   local hl = { lang = {}, plugin = {}, }
 
    hl.common = {
       Normal = { bg = p.bg, fg = p.norm },
@@ -108,6 +108,36 @@ local function load_highlights(p)
       qfLineNr = { fg = p.medium_gray },
    }
 
+   hl.lang.markdown = {
+      markdownBlockquote = { fg = p.norm },
+      markdownBold = { fg = p.norm, bold = true },
+      markdownBoldItalic = { fg = p.norm, italic = true, bold = true },
+      markdownEscape = { fg = norm },
+      markdownH1 = { fg = p.head_a, italic = true, bold = true },
+      markdownH2 = { fg = p.head_a, bold = true },
+      markdownH3 = { fg = p.head_a, italic = true },
+      markdownH4 = { fg = p.head_a, italic = true },
+      markdownH5 = { fg = p.head_a },
+      markdownH6 = { fg = p.head_a },
+      markdownHeadingDelimiter = { fg = p.norm },
+      markdownHeadingRule = { fg = p.norm },
+      markdownId = { fg = p.medium_gray },
+      markdownIdDeclaration = { fg = p.norm_subtle },
+      markdownItalic = { fg = p.norm, italic = true },
+      markdownLinkDelimiter = { fg = p.medium_gray },
+      markdownLinkText = { fg = p.norm },
+      markdownLinkTextDelimiter = { fg = p.medium_gray },
+      markdownListMarker = { fg = p.norm },
+      markdownOrderedListMarker = { fg = p.norm },
+      markdownRule = { fg = p.norm },
+      markdownUrl = { fg = p.medium_gray, underline = true },
+      markdownUrlDelimiter = { fg = p.medium_gray },
+      markdownUrlTitle = { fg = p.norm },
+      markdownUrlTitleDelimiter = { fg = p.medium_gray },
+      markdownCode = { fg = p.norm, bg = p.code_bg },
+      markdownCodeDelimiter = { fg = p.norm, bg = p.code_bg },
+   }
+
    return hl
 end
 
@@ -115,6 +145,7 @@ function M.setup(palette)
    local hl = load_highlights(palette)
    set_highlight(hl.common)
    set_highlight(hl.ui_chrome)
+   set_highlight(hl.lang.markdown)
 end
 
 return M
