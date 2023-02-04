@@ -12,13 +12,13 @@ Just don't have `vim-colors-pencil` installed!
 
 Load using
 
-```
+```vim
 colorscheme pencil
 ```
 
 or 
 
-```
+```lua
 require("pencil").load()
 ```
 
