@@ -9,7 +9,7 @@ local function set_highlight(hl_group)
 end
 
 local function load_highlights(p)
-   local hl = { lang = {}, plugin = {}, }
+   local hl = { lang = {}, plugin = {} }
 
    hl.common = {
       Normal = { bg = p.bg, fg = p.norm },
@@ -138,6 +138,27 @@ local function load_highlights(p)
       markdownUrlTitleDelimiter = { fg = p.medium_gray },
       markdownCode = { fg = p.norm, bg = p.code_bg },
       markdownCodeDelimiter = { fg = p.norm, bg = p.code_bg },
+   }
+   
+   -- XML is included
+   hl.lang.html = {
+      htmlTag = { link = "Special" },
+      htmlEndTag = { link = "htmlTag" },
+      htmlTagName = { link = "Keyword" },
+      htmlTagN = { link = "Keyword" },
+      htmlH1 = { fg = p.head_a, bold = true, italic = true },
+      htmlH2 = { fg = p.head_a, bold = true },
+      htmlH3 = { fg = p.head_a, italic = true },
+      htmlH4 = { fg = p.head_a, italic  },
+      htmlH5 = { fg = p.head_a },
+      htmlH6 = { fg = p.head_a },
+      htmlLink = { fg = p.blue, underline = true },
+      htmlItalic = { italic = true },
+      htmlBold = { bold = true },
+      htmlBoldItalic = { bold = true, italic = true },
+      xmlTag = { link = "htmlTag" },
+      xmlEndTag = { link = "xmlTag" },
+      xmlTagName = { link = "htmlTagName" },
    }
 
    return hl

@@ -10,6 +10,7 @@ M.config = {
       gutter_color = false,
    },
    lang = {
+      html = true,
       markdown = true,
    },
 }
