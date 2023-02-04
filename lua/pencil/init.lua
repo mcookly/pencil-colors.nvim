@@ -1,19 +1,36 @@
 local M = {}
 
+M.config = {
+   options = {
+      higher_contrast_ui = false,
+      neutral_code_bg = false,
+      neutral_headings = false,
+      terminal_italics = false,
+      spell_undercurl = true,
+      gutter_color = false,
+   },
+   lang = {
+      markdown = true,
+   },
+}
+
 function M.setup(opts)
-
-   vim.opt.termguicolors = true
-   vim.g.colors_name = "pencil"
-
    -- Initialize user options only once.
    -- User must call `require("pencil").setup(opts) to override defaults.
-   require("pencil.config").setup(opts)
+   M.config = vim.tbl_deep_extend("force", M.config, opts or nil)
 end
 
 function M.load()
-   -- Set colorscheme
-   -- This function is triggered with `colorsceme pencil` is called.
-   vim.cmd.colorscheme("pencil")
+   -- This function is triggered when `colorsceme pencil` is called.
+   if vim.g.colors_name then
+      vim.cmd("highlight clear")
+   end
+
+   if not vim.o.termguicolors then
+      vim.o.termguicolors = true
+   end
+
+   vim.g.colors_name = "pencil"
  
    -- Generate the palette based on the current background and user options
    -- and pass generated palette into the highlights generator.

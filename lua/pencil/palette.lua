@@ -1,4 +1,4 @@
-local c = require("pencil.config").config
+local c = require("pencil").config
 
 local M = {}
 
@@ -9,7 +9,7 @@ local base_palette = {
    actual_white = "#FFFFFF",
    light_black = "#424242",
    lighter_black = "#545454",
-   pink = "#fb007a",
+   pink = "#FB007A",
    dark_red = "#C30771",
    light_red = "#E32791",
    orange = "#D75F5F",
@@ -32,43 +32,43 @@ function M.generate_palette(bg)
 
    if c.options.higher_contrast_ui then
       theme = vim.tbl_extend("error", theme, {
-         subtle_black = "#262626",
-         light_gray = "#D9D9D9",
-         lighter_gray = "#E5E6E6",
-      })
-   else
-      theme = vim.tbl_extend("error", theme, {
          subtle_black = "#303030",
          light_gray = "#B2B2B2",
          lighter_gray = "#C6C6C6",
       })
+   else
+      theme = vim.tbl_extend("error", theme, {
+         subtle_black = "#262626",
+         light_gray = "#D9D9D9",
+         lighter_gray = "#E5E6E6",
+      })
    end
 
    if bg == "dark" then
-      theme = vim.tbl_extend("error", base_palette, {
-            bg = base_palette.black,
-            bg_subtle = base_palette.light_black,
-            bg_very_subtle = base_palette.subtle_black,
-            norm = base_palette.lighter_gray,
-            norm_subtle = base_palette.light_gray,
-            purple = base_palette.light_purple,
-            cyan = base_palette.light_cyan,
-            green = base_palette.light_green,
-            red = base_palette.light_red,
-            visual = base_palette.lighter_black,
+      theme = vim.tbl_extend("error", theme, {
+            bg = theme.black,
+            bg_subtle = theme.light_black,
+            bg_very_subtle = theme.subtle_black,
+            norm = theme.lighter_gray,
+            norm_subtle = theme.light_gray,
+            purple = theme.light_purple,
+            cyan = theme.light_cyan,
+            green = theme.light_green,
+            red = theme.light_red,
+            visual = theme.lighter_black,
       })
    else
-      theme = vim.tbl_extend("error", base_palette, {
-            bg = base_palette.white,
-            bg_subtle = base_palette.light_gray,
-            bg_very_subtle = base_palette.lighter_gray,
-            norm = base_palette.light_black,
-            norm_subtle = base_palette.lighter_black,
-            purple = base_palette.dark_purple,
-            cyan = base_palette.dark_cyan,
-            green = base_palette.dark_green,
-            red = base_palette.dark_red,
-            visual = base_palette.light_blue,
+      theme = vim.tbl_extend("error", theme, {
+            bg = theme.white,
+            bg_subtle = theme.light_gray,
+            bg_very_subtle = theme.lighter_gray,
+            norm = theme.light_black,
+            norm_subtle = theme.lighter_black,
+            purple = theme.dark_purple,
+            cyan = theme.dark_cyan,
+            green = theme.dark_green,
+            red = theme.dark_red,
+            visual = theme.light_blue,
       })
    end
 
@@ -87,15 +87,16 @@ function M.generate_palette(bg)
    end
 
    if c.options.neutral_code_bg then
-      theme["code_bg"] = theme.bg
+      theme.code_bg = theme.bg
    else
-      theme["code_bg"] = theme.bg_very_subtle
+      theme.code_bg = theme.bg_very_subtle
    end
 
+   theme.sp_un = {}
    if c.options.spell_undercurl then
-      theme["sp_un"] = { undercurl = true, underline = false }
+      theme.sp_un = { undercurl = true, underline = false }
    else
-      theme["sp_un"] = { undercurl = false, underline = true }
+      theme.sp_un = { undercurl = false, underline = true }
    end
 
    return theme

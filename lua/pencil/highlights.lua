@@ -1,3 +1,5 @@
+local c = require("pencil").config
+
 local M = {}
 
 local function set_highlight(hl_group)
@@ -88,10 +90,10 @@ local function load_highlights(p)
       DiffText = { bg = p.bg_subtle, fg = p.dark_blue },
       SignColumn = { fg = p.light_green },
       -- Spelling
-      -- SpellBad = { unpack(p.sp_un), sp = p.red, fg = p.red },
-      -- SpellRare = { unpack(p.sp_un), sp = p.light_green, fg = p.light_green },
-      -- SpellRare = { unpack(p.sp_un), sp = p.pink, fg = p.pink },
-      -- SpellLocal = { unpack(p.sp_un), sp = p.dark_green, fg = p.dark_green },
+      SpellBad = vim.tbl_extend("error", p.sp_un, { sp = p.red, fg = p.red }),
+      SpellCap = vim.tbl_extend("error", p.sp_un, { sp = p.light_green, fg = p.light_green }),
+      SpellRare = vim.tbl_extend("error", p.sp_un, { sp = p.pink, fg = p.pink }),
+      SpellLocal = vim.tbl_extend("error", p.sp_un, { sp = p.dark_green, fg = p.dark_green }),
       -- Menu
       Pmenu = { fg = p.norm, bg = p.bg_subtle },
       PmenuSel = { fg = p.norm, bg = p.blue },
@@ -143,9 +145,15 @@ end
 
 function M.setup(palette)
    local hl = load_highlights(palette)
+
    set_highlight(hl.common)
    set_highlight(hl.ui_chrome)
-   set_highlight(hl.lang.markdown)
+
+   for lang_name, lang_enabled in pairs(c.lang) do
+      if lang_enabled then
+         set_highlight(hl.lang[lang_name])
+      end
+   end
 end
 
 return M
