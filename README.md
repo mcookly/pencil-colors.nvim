@@ -1,6 +1,6 @@
-# Pencil Colors for Neovim
+# pencil-colors.nvim
 
-This is the same thing as the beloved [vim-colors-pencil](https://github.com/preservim/vim-colors-pencil), except it is ported to lua with a couple of small tweaks.
+This is the same thing as the beloved [vim-colors-pencil](https://github.com/preservim/vim-colors-pencil), except it is ported to lua with a couple of small color tweaks and lack of color support for certain vim plugins.
 **This only works in Neovim.**
 
 ## Install
@@ -25,7 +25,7 @@ require("pencil").load()
 ## Customize
 
 Use the setup function.
-Here are the defaults:
+Here are the defaults (same as vim-colors-pencil):
 
 ```lua
 require("pencil").setup({
